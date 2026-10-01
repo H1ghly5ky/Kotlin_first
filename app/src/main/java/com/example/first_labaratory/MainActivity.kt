@@ -1,5 +1,6 @@
 package com.example.first_labaratory
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -8,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import kotlin.toString
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,12 +21,13 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val textView = findViewById<TextView>(R.id.ThereSomething)
+
         val editText = findViewById<EditText>(R.id.editTextText2)
         val button = findViewById<Button>(R.id.button2)
-        textView.text = "" //git log --oneline  git switch -c lab3 71d3e21(для перехода между версиями)
-        button.setOnClickListener { textView.text = "Привет, " + editText.text + "!" }
-
-
+        button.setOnClickListener {
+            val intent = Intent(this@MainActivity, SecondActivity::class.java)
+            intent.putExtra("text2remember", editText.text.toString())
+            startActivity(intent)
+        }
     }
 }
